@@ -80,12 +80,20 @@ public class LocationUtils {
     coords.putDouble("heading", location.getBearing());
     coords.putDouble("speed", location.getSpeed());
     map.putMap("coords", coords);
-    map.putDouble("timestamp", (double)System.currentTimeMillis());
+    map.putString("timestamp", nowAsISO());
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       map.putBoolean("mocked", location.isFromMockProvider());
     }
 
     return map;
+  }
+
+  private static String nowAsISO() {
+    TimeZone tz = TimeZone.getTimeZone("UTC");
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSS'Z'");
+    df.setTimeZone(tz);
+    
+    return df.format(new Date());
   }
 }
