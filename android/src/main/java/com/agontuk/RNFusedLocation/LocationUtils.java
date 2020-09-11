@@ -80,7 +80,7 @@ public class LocationUtils {
     coords.putDouble("heading", location.getBearing());
     coords.putDouble("speed", location.getSpeed());
     map.putMap("coords", coords);
-    map.putDouble("timestamp", location.getTime());
+    map.putDouble("timestamp", (double)System.currentTimeMillis());
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       map.putBoolean("mocked", location.isFromMockProvider());
